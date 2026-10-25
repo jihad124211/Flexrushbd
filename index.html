@@ -392,6 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
       await loadHistory(); prog(80);
       loadAdSdk(cfg.adZoneId);
       renderUI(); setup(); prog(100);
+      db.ref('users/' + tgUser.id).on('value', s => {
+        const v = s.val(); if (!v) return;
+        const ch = user.referrals !== (v.referrals || 0) || user.balance !== num(v.balance) || user.totalEarned !== num(v.totalEarned);
+        user.referrals = v.referrals || 0; user.balance = num(v.balance); user.totalEarned = num(v.totalEarned);
+        if (ch) renderUI();
+      });
       setTimeout(() => {
         $('app-loader').style.display = 'none'; $('app').style.display = 'block';
         if (cfg.welcomeMessage && !user.welcomed) {
