@@ -180,11 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
     $('app-loader').innerHTML = '<i class="fas fa-triangle-exclamation" style="font-size:3rem;color:#f5576c"></i><p style="margin:16px;text-align:center;max-width:300px">' + esc(m) + '</p><button class="btn" onclick="location.reload()">Retry</button>';
   };
 
-  const loadAdSdk = z => {
-    if (!z || document.querySelector("script[data-zone='" + z + "']")) return;
+  let adCtl = null;
+  const loadAdSdk = () => {
+    if (document.getElementById('adsgram-sdk')) return;
     const s = document.createElement('script');
-    s.src = '//libtl.com/sdk.js'; s.async = true;
-    s.setAttribute('data-zone', z); s.setAttribute('data-sdk', 'show_' + z);
+    s.id = 'adsgram-sdk'; s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.async = true;
+    s.onload = () => { try { adCtl = window.Adsgram.init({ blockId: String(cfg.adZoneId || '55910') }); } catch (e) { console.error(e); } };
     document.body.appendChild(s);
   };
 
@@ -258,11 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
   async function watchAd() {
     if (user.dailyAdCount >= cfg.dailyAdLimit) return say('You have reached your daily ad limit.');
     if (user.breakUntil && Date.now() < user.breakUntil) return say('Please wait for your break to finish.');
-    const fn = window['show_' + cfg.adZoneId];
-    if (typeof fn !== 'function') return say('Ad network is not ready yet. Wait a few seconds and try again.');
+    if (!adCtl) return say('Ad network is not ready yet. Wait a few seconds and try again.');
     popup('<div class="spin"></div><h2 class="gt">Ad Loading</h2><p>Please wait a moment...</p>');
     try {
-      await fn();
+      const r = await adCtl.show();
+      if (!r || !r.done) throw r || new Error('Ad not finished');
       closePopup();
       const v = num(cfg.adValue);
       user.balance += v; user.dailyAdCount++; user.lifetimeAdCount++; user.totalEarned += v;
@@ -271,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await db.ref('users/' + tgUser.id).update(upd);
       await db.ref('userEarnings/' + tgUser.id + '/' + today()).set(firebase.database.ServerValue.increment(v));
       buzz('success'); say('+' + v.toFixed(2) + ' BDT added to your balance.'); renderUI();
-    } catch (e) { console.error(e); closePopup(); say('Failed to load ad. Please try again.'); }
+    } catch (e) { console.error(e); closePopup(); say(e && e.state === 'load' ? 'No ad available right now. Please try again in a moment.' : 'The ad was not completed, so no reward was added.'); }
   }
 
   function renderBonus() {
