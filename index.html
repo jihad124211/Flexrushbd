@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>FLEX RUSH - Earn Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--pg:linear-gradient(135deg,#6a11cb,#2575fc);--sg:linear-gradient(135deg,#f093fb,#f5576c);--ok:linear-gradient(135deg,#00b09b,#96c93d);--wg:linear-gradient(135deg,#f6d365,#fda085);--bad:linear-gradient(135deg,#ff416c,#ff4b2b);--bg:#f8f9ff;--card:rgba(255,255,255,.92);--tx:#1a1a2e;--tx2:#5a5a72;--bd:rgba(106,17,203,.1);--sh:rgba(106,17,203,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 10% 20%,rgba(106,17,203,.05),transparent 20%),radial-gradient(circle at 90% 80%,rgba(37,117,252,.05),transparent 20%)}
+#app{max-width:500px;margin:0 auto;padding-bottom:90px;min-height:100vh}
+.page{display:none;padding:15px;animation:fi .4s}.page.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes sh{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes sp{to{transform:rotate(360deg)}}
+.card{background:var(--card);border:1px solid var(--bd);box-shadow:0 5px 15px var(--sh);border-radius:16px}
+.gt{background:var(--pg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hdr{padding:20px 15px;display:flex;align-items:center;gap:15px;border-radius:0 0 20px 20px;margin-bottom:15px;background:var(--pg);color:#fff;box-shadow:0 4px 20px rgba(106,17,203,.2);position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%);background-size:200% 100%;animation:sh 3s infinite}
+.hdr>*{position:relative}
+.hdr img{width:60px;height:60px;border-radius:50%;border:3px solid rgba(255,255,255,.3);object-fit:cover}
+.hdr h1{font-size:1.1rem}.hdr b{color:#ffd700;font-size:1.1rem}
+.brand{position:absolute!important;top:8px;right:14px;font-size:.7rem;font-weight:700;letter-spacing:2px;opacity:.85}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}
+.stat{padding:18px 12px;text-align:center}
+.stat i{font-size:1.6rem;margin-bottom:8px}
+.stat h3{font-size:.75rem;font-weight:500;color:var(--tx2);text-transform:uppercase;margin-bottom:6px}
+.stat p{font-size:1.3rem;font-weight:700}
+.ref{background:var(--sg);color:#fff;border-radius:20px;padding:22px 18px;box-shadow:0 8px 25px rgba(245,87,108,.2)}
+.ref h3{margin-bottom:10px}
+.pill{background:rgba(255,255,255,.2);padding:8px 15px;border-radius:50px;display:inline-block;margin-bottom:15px}
+.row{display:flex;margin-bottom:15px}
+.row input{flex:1;min-width:0;padding:12px;border:0;border-radius:12px 0 0 12px;font:inherit;font-size:.85rem}
+.row button{border:0;background:#fff;color:#6a11cb;padding:0 16px;border-radius:0 12px 12px 0;cursor:pointer;font-size:1.1rem}
+.sb{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sb button{padding:12px;border:0;border-radius:12px;color:#fff;font:inherit;font-weight:600;cursor:pointer}
+h2.sec{font-size:1.2rem;margin:20px 0 14px;padding-left:10px;border-left:4px solid #6a11cb}
+.task{padding:16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.ti{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;background:var(--pg);flex:none;overflow:hidden}
+.ti.ok{background:var(--ok)}.ti img{width:100%;height:100%;object-fit:cover}
+.tinfo{flex:1;min-width:0}.tinfo h3{font-size:1rem}.tinfo p{font-size:.8rem;opacity:.8}
+.rw{font-weight:700;color:#00b09b}
+.btn{padding:10px 18px;font:inherit;font-size:.9rem;font-weight:600;color:#fff;border:0;border-radius:10px;cursor:pointer;background:var(--pg);white-space:nowrap}
+.btn:disabled{background:#808B96;cursor:not-allowed}
+.pi{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:8px}
+.pb{height:12px;border-radius:6px;background:rgba(106,17,203,.1);overflow:hidden;margin-bottom:18px}
+.pb div{height:100%;background:var(--pg);transition:width .5s}
+.sup{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.sc{padding:18px 10px;text-align:center;cursor:pointer}
+.sc i{font-size:1.8rem}.sc img{width:36px;height:36px;object-fit:cover;border-radius:8px}
+.sc h3{font-size:.95rem;margin-top:8px}
+.wf{padding:22px 18px;margin-top:15px}
+.wf h3,.hist h3{margin-bottom:16px}
+.fg{margin-bottom:16px}.fg label{display:block;margin-bottom:6px;font-weight:500}
+.fg input,.fg select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--bd);font:inherit}
+.fg input:focus,.fg select:focus{outline:0;border-color:#6a11cb;box-shadow:0 0 0 3px rgba(106,17,203,.2)}
+.note{background:rgba(255,193,7,.12);padding:14px;border-radius:12px;margin-bottom:16px;border-left:4px solid #ffc107;display:none}
+.hist{margin-top:25px}
+.hi{display:flex;justify-content:space-between;align-items:center;padding:14px;margin-bottom:10px;border-radius:12px}
+.st{padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:600;color:#fff}
+.st.completed{background:var(--ok)}.st.pending{background:var(--wg)}.st.rejected{background:var(--bad)}
+#popup{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center;z-index:10000;backdrop-filter:blur(5px)}
+.pc{padding:28px;border-radius:20px;text-align:center;max-width:80%;background:#fff}
+.pc h2{margin-bottom:12px}.pc p{margin-bottom:18px}
+.spin{width:50px;height:50px;border-radius:50%;border:4px solid;border-color:#6a11cb transparent #2575fc transparent;animation:sp 1.1s linear infinite;margin:0 auto 15px}
+#app-loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--bg);padding:20px}
+.lb{width:80%;max-width:300px;height:8px;border-radius:4px;background:rgba(106,17,203,.1);overflow:hidden;margin-top:20px}
+#loading-bar{height:100%;width:0;background:var(--pg);transition:width .3s}
+#loading-progress{margin-top:14px;font-weight:600}
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:500px;margin:0 auto;display:flex;padding:12px 0;border-radius:25px 25px 0 0;z-index:1000;background:#fff;box-shadow:0 -5px 20px var(--sh);border-top:1px solid var(--bd)}
+.nav button{flex:1;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;font:inherit;font-size:.75rem;color:var(--tx2);transition:.2s}
+.nav i{font-size:1.4rem;margin-bottom:4px;transition:.2s}
+.nav .on{color:#6a11cb}.nav .on i{transform:translateY(-4px)}
+</style>
+</head>
+<body>
+<div id="app-loader"><div class="spin"></div><div class="lb"><div id="loading-bar"></div></div><p id="loading-progress">Loading... 0%</p></div>
+<div id="popup"><div class="pc" id="popup-body"></div></div>
+
+<div id="app" style="display:none">
+  <header class="hdr">
+    <span class="brand">FLEX RUSH</span>
+    <img id="user-photo" alt="User">
+    <div><h1 id="user-name">Loading...</h1><div><i class="fas fa-wallet"></i> Balance: <b id="user-balance">0.00</b> BDT</div></div>
+  </header>
+
+  <div id="home-page" class="page active">
+    <div class="grid">
+      <div class="card stat"><i class="fas fa-eye gt"></i><h3>Today's Ads</h3><p class="gt" id="daily-ads-watched">0 / 0</p></div>
+      <div class="card stat"><i class="fas fa-users gt"></i><h3>Referrals</h3><p class="gt" id="referral-count">0</p></div>
+      <div class="card stat"><i class="fas fa-ad gt"></i><h3>Total Ads</h3><p class="gt" id="total-ads-watched">0</p></div>
+      <div class="card stat"><i class="fas fa-money-bill-wave gt"></i><h3>Total Earned</h3><p class="gt" id="total-earned">0.00</p></div>
+    </div>
+    <div class="ref">
+      <h3><i class="fas fa-share-alt"></i> Refer &amp; Earn</h3>
+      <div class="pill" id="referral-bonus-amount"></div>
+      <div class="row"><input id="referral-link" readonly value="Loading..."><button id="copy-ref-link-btn" aria-label="Copy link"><i class="fas fa-copy"></i></button></div>
+      <div class="sb">
+        <button id="share-telegram-btn" style="background:#0088cc"><i class="fab fa-telegram"></i> Telegram</button>
+        <button id="share-whatsapp-btn" style="background:#25D366"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tasks-page" class="page">
+    <h2 class="sec"><i class="fas fa-ad"></i> Watch Ads</h2>
+    <div id="ad-progress"></div><div id="ad-task"></div>
+    <h2 class="sec"><i class="fas fa-gift"></i> Bonus Tasks</h2>
+    <div id="bonus-tasks"></div>
+  </div>
+
+  <div id="support-page" class="page">
+    <h2 class="sec"><i class="fas fa-headset"></i> Support</h2>
+    <div class="sup" id="support-links"></div>
+  </div>
+
+  <div id="withdraw-page" class="page">
+    <div class="card wf">
+      <h3><i class="fas fa-money-check-alt"></i> Withdraw Money</h3>
+      <div class="note" id="min-note"></div>
+      <form id="withdraw-form">
+        <div class="fg"><label for="withdraw-method">Withdraw Method</label><select id="withdraw-method" required><option value="">Select method</option></select></div>
+        <div class="fg"><label for="account-number">Account Number / ID</label><input id="account-number" required placeholder="Enter your account number"></div>
+        <div class="fg"><label for="amount">Amount (BDT)</label><input type="number" step="any" id="amount" required placeholder="Enter amount"></div>
+        <button type="submit" id="withdraw-submit-btn" class="btn"><i class="fas fa-paper-plane"></i> Submit Request</button>
+      </form>
+    </div>
+    <div class="hist"><h3><i class="fas fa-history"></i> Withdrawal History</h3><div id="withdrawal-history-list"></div></div>
+  </div>
+
+  <nav class="nav">
+    <button class="on" data-page="home-page"><i class="fas fa-home"></i>Home</button>
+    <button data-page="tasks-page"><i class="fas fa-tasks"></i>Tasks</button>
+    <button data-page="support-page"><i class="fas fa-headset"></i>Support</button>
+    <button data-page="withdraw-page"><i class="fas fa-wallet"></i>Withdraw</button>
+  </nav>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const firebaseConfig = {
+    apiKey: "XXX", authDomain: "XXX", databaseURL: "XXX", projectId: "XXX",
+    storageBucket: "XXX", messagingSenderId: "XXX", appId: "XXX", measurementId: "XXX"
+  };
+  const tg = window.Telegram && window.Telegram.WebApp;
+  const $ = id => document.getElementById(id);
+  const AV = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%236a11cb'/><circle cx='40' cy='32' r='14' fill='%23fff' opacity='.8'/><ellipse cx='40' cy='72' rx='24' ry='20' fill='%23fff' opacity='.8'/></svg>";
+  const DEFAULT_LINKS = [
+    {name:'Contact Admin', icon:'fa-headset', url:'https://t.me/Daraz_Admin5'},
+    {name:'Our Channel', icon:'fa-broadcast-tower', url:'https://t.me/win_bot222'},
+    {name:'Support Group', icon:'fa-users', url:'https://t.me/win_bot333'},
+    {name:'FAQ', icon:'fa-question-circle', url:'https://t.me/free_refer_incom'},
+    {name:'Tutorial Video', icon:'fa-circle-play', url:'https://t.me/unlimited_gmail_video'}
+  ];
+  let db, cfg = {}, user = {}, tgUser, txs = [];
+
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+  const num = v => parseFloat(v) || 0;
+  const say = m => { try { tg.showAlert(m); } catch (e) { alert(m); } };
+  const buzz = t => { try { tg.HapticFeedback.notificationOccurred(t); } catch (e) {} };
+  const go = u => { u = safeUrl(u); if (!u) return; try { tg.openLink(u); } catch (e) { window.open(u, '_blank'); } };
+  const T = (p, ms = 12000) => Promise.race([p, new Promise((_, r) => setTimeout(() => r(new Error('Connection timed out. Check the Firebase databaseURL and your internet.')), ms))]);
+  const prog = p => { $('loading-progress').textContent = 'Loading... ' + p + '%'; $('loading-bar').style.width = p + '%'; };
+  const popup = h => { $('popup-body').innerHTML = h; $('popup').style.display = 'flex'; };
+  const closePopup = () => { $('popup').style.display = 'none'; };
+  const today = () => new Date().toISOString().slice(0, 10);
+
+  const fail = m => {
+    $('app-loader').innerHTML = '<i class="fas fa-triangle-exclamation" style="font-size:3rem;color:#f5576c"></i><p style="margin:16px;text-align:center;max-width:300px">' + esc(m) + '</p><button class="btn" onclick="location.reload()">Retry</button>';
+  };
+
+  const loadAdSdk = z => {
+    if (!z || document.querySelector("script[data-zone='" + z + "']")) return;
+    const s = document.createElement('script');
+    s.src = '//libtl.com/sdk.js'; s.async = true;
+    s.setAttribute('data-zone', z); s.setAttribute('data-sdk', 'show_' + z);
+    document.body.appendChild(s);
+  };
+
+  async function loadUser() {
+    const ref = db.ref('users/' + tgUser.id);
+    let u = (await T(ref.once('value'))).val();
+    if (!u) {
+      const sp = tg.initDataUnsafe.start_param;
+      const refId = (sp && /^\d+$/.test(sp) && sp != tgUser.id) ? sp : null;
+      u = { id: tgUser.id, firstName: tgUser.first_name || '', lastName: tgUser.last_name || '', username: tgUser.username || '',
+        photoUrl: tgUser.photo_url || '', balance: 0, referrals: 0, referredBy: refId, totalEarned: 0, lifetimeAdCount: 0,
+        lastAdWatchDate: '1970-01-01', dailyAdCount: 0, breakUntil: 0, completedTasks: {}, welcomed: false };
+      await ref.set(u);
+      if (refId) {
+        const bonus = num(cfg.referralBonus);
+        await db.ref('users/' + refId).transaction(c => {
+          if (c) { c.referrals = (c.referrals || 0) + 1; if (bonus > 0) { c.balance = (c.balance || 0) + bonus; c.totalEarned = (c.totalEarned || 0) + bonus; } }
+          return c;
+        });
+      }
+    }
+    u.balance = num(u.balance); u.totalEarned = num(u.totalEarned); u.referrals = u.referrals || 0;
+    u.dailyAdCount = u.dailyAdCount || 0; u.lifetimeAdCount = u.lifetimeAdCount || 0;
+    if (u.lastAdWatchDate !== today()) {
+      u.dailyAdCount = 0; u.lastAdWatchDate = today();
+      await ref.update({ dailyAdCount: 0, lastAdWatchDate: u.lastAdWatchDate });
+    }
+    user = u;
+  }
+
+  async function loadHistory() {
+    txs = [];
+    const snaps = await Promise.all(['pending', 'completed', 'rejected'].map(s =>
+      T(db.ref('withdrawals/' + s).orderByChild('userId').equalTo(tgUser.id).once('value')).catch(() => null)));
+    snaps.forEach(sn => sn && sn.forEach(c => { txs.push(c.val()); }));
+    txs.sort((a, b) => b.timestamp - a.timestamp);
+  }
+
+  function renderUI() {
+    $('user-photo').src = user.photoUrl || AV;
+    $('user-photo').onerror = function () { this.onerror = null; this.src = AV; };
+    $('user-name').textContent = ((user.firstName || '') + ' ' + (user.lastName || '')).trim() || 'User';
+    $('user-balance').textContent = user.balance.toFixed(2);
+    $('daily-ads-watched').textContent = user.dailyAdCount + ' / ' + (cfg.dailyAdLimit || 0);
+    $('referral-count').textContent = user.referrals;
+    $('total-ads-watched').textContent = user.lifetimeAdCount;
+    $('total-earned').textContent = user.totalEarned.toFixed(2);
+    $('referral-bonus-amount').textContent = 'Earn ' + (cfg.referralBonus || 0) + ' BDT per referral';
+    $('referral-link').value = 'https://t.me/' + (cfg.botUsername || '') + '/app?startapp=' + tgUser.id;
+    renderAdProgress(); renderAdTask(); renderBonus(); renderSupport(); renderMethods(); renderHistory();
+    const min = cfg.minimumWithdrawReferrals || 0, n = $('min-note');
+    n.style.display = min > 0 ? 'block' : 'none';
+    n.textContent = 'You need at least ' + min + ' referrals to withdraw. You currently have ' + user.referrals + '.';
+  }
+
+  function renderAdProgress() {
+    const lim = cfg.dailyAdLimit || 1, pct = Math.min(100, user.dailyAdCount / lim * 100);
+    $('ad-progress').innerHTML = '<div class="pi"><span>Daily Ad Progress</span><span>' + user.dailyAdCount + ' / ' + lim + '</span></div><div class="pb"><div style="width:' + pct + '%"></div></div>';
+  }
+
+  function renderAdTask() {
+    const onBreak = user.breakUntil && Date.now() < user.breakUntil;
+    const limit = user.dailyAdCount >= (cfg.dailyAdLimit || 0);
+    let icon = 'fa-play-circle', title = 'Watch Rewarded Ad', sub = 'Earn <span class="rw">' + (cfg.adValue || 0) + ' BDT</span> per ad.', btn = '<button id="watch-ad-btn" class="btn">Watch Ad</button>';
+    if (onBreak) { icon = 'fa-hourglass-half'; title = 'Break Time!'; sub = 'Please wait ' + Math.ceil((user.breakUntil - Date.now()) / 60000) + ' more minute(s).'; btn = '<button class="btn" disabled>Please Wait</button>'; }
+    else if (limit) { icon = 'fa-stop-circle'; title = 'Daily Limit Reached'; sub = 'Come back tomorrow for more ads.'; btn = '<button class="btn" disabled>Limit Reached</button>'; }
+    $('ad-task').innerHTML = '<div class="card task"><div class="ti"><i class="fas ' + icon + '"></i></div><div class="tinfo"><h3>' + title + '</h3><p>' + sub + '</p></div>' + btn + '</div>';
+    const b = $('watch-ad-btn'); if (b) b.onclick = watchAd;
+  }
+
+  async function watchAd() {
+    if (user.dailyAdCount >= cfg.dailyAdLimit) return say('You have reached your daily ad limit.');
+    if (user.breakUntil && Date.now() < user.breakUntil) return say('Please wait for your break to finish.');
+    const fn = window['show_' + cfg.adZoneId];
+    if (typeof fn !== 'function') return say('Ad network is not ready yet. Wait a few seconds and try again.');
+    popup('<div class="spin"></div><h2 class="gt">Ad Loading</h2><p>Please wait a moment...</p>');
+    try {
+      await fn();
+      closePopup();
+      const v = num(cfg.adValue);
+      user.balance += v; user.dailyAdCount++; user.lifetimeAdCount++; user.totalEarned += v;
+      const upd = { balance: firebase.database.ServerValue.increment(v), dailyAdCount: user.dailyAdCount, lifetimeAdCount: user.lifetimeAdCount, totalEarned: firebase.database.ServerValue.increment(v) };
+      if (cfg.adsPerBreak > 0 && user.dailyAdCount % cfg.adsPerBreak === 0) { user.breakUntil = Date.now() + cfg.breakDuration * 60000; upd.breakUntil = user.breakUntil; }
+      await db.ref('users/' + tgUser.id).update(upd);
+      await db.ref('userEarnings/' + tgUser.id + '/' + today()).set(firebase.database.ServerValue.increment(v));
+      buzz('success'); say('+' + v.toFixed(2) + ' BDT added to your balance.'); renderUI();
+    } catch (e) { console.error(e); closePopup(); say('Failed to load ad. Please try again.'); }
+  }
+
+  function renderBonus() {
+    const box = $('bonus-tasks'), t = cfg.tasks || {};
+    const list = Object.keys(t).map(k => Object.assign({ key: k }, t[k])).reverse();
+    if (!list.length) { box.innerHTML = '<p style="text-align:center;opacity:.7;padding:10px">No bonus tasks right now.</p>'; return; }
+    box.innerHTML = list.map(k => {
+      const done = user.completedTasks && user.completedTasks[k.key];
+      const ic = safeUrl(k.icon) ? '<img src="' + esc(k.icon) + '" alt="">' : '<i class="fas fa-gift"></i>';
+      return '<div class="card task"><div class="ti ok">' + ic + '</div><div class="tinfo"><h3>' + esc(k.name) + '</h3><p>Get <span class="rw">' + esc(k.reward) + ' BDT</span> bonus</p></div><button class="btn" data-task="' + esc(k.key) + '"' + (done ? ' disabled' : '') + '>' + (done ? '<i class="fas fa-check"></i> Claimed' : 'Claim Bonus') + '</button></div>';
+    }).join('');
+  }
+
+  function renderSupport() {
+    const l = cfg.links ? Object.keys(cfg.links).map(k => cfg.links[k]).reverse() : DEFAULT_LINKS;
+    $('support-links').innerHTML = l.map(x => {
+      const ic = safeUrl(x.icon) ? '<img src="' + esc(x.icon) + '" alt="">' : '<i class="fas ' + esc(/^fa-/.test(x.icon || '') ? x.icon : 'fa-link') + ' gt"></i>';
+      return '<div class="card sc" data-url="' + esc(safeUrl(x.url)) + '">' + ic + '<h3>' + esc(x.name) + '</h3></div>';
+    }).join('');
+  }
+
+  function renderMethods() {
+    const sel = $('withdraw-method'), prev = sel.value;
+    while (sel.options.length > 1) sel.remove(1);
+    (cfg.withdrawMethods || []).forEach(m => { const o = document.createElement('option'); o.value = m.name; o.textContent = m.name + ' (Min: ' + m.min + ' BDT)'; sel.appendChild(o); });
+    sel.value = prev;
+  }
+
+  function renderHistory() {
+    const el = $('withdrawal-history-list');
+    if (!txs.length) { el.innerHTML = '<p style="text-align:center;padding:20px;opacity:.7">No withdrawal history yet.</p>'; return; }
+    el.innerHTML = txs.map(i => '<div class="card hi"><div><b>' + num(i.amount).toFixed(2) + ' BDT - ' + esc(i.method) + '</b><br><small>' + new Date(i.timestamp).toLocaleString('en-US') + '</small></div><span class="st ' + esc(i.status) + '">' + esc(i.status) + '</span></div>').join('');
+  }
+
+  async function claimTask(id) {
+    const task = (cfg.tasks || {})[id];
+    if (!task || (user.completedTasks && user.completedTasks[id])) return say('You have already claimed this bonus.');
+    go(task.url);
+    const btn = document.querySelector('[data-task="' + id + '"]');
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Claiming...';
+    setTimeout(async () => {
+      try {
+        const ref = db.ref('users/' + tgUser.id);
+        const r = await ref.child('completedTasks/' + id).transaction(c => c ? undefined : true);
+        if (!r.committed) return say('You have already claimed this bonus.');
+        const rw = num(task.reward);
+        await ref.update({ balance: firebase.database.ServerValue.increment(rw), totalEarned: firebase.database.ServerValue.increment(rw) });
+        user.balance += rw; user.totalEarned += rw;
+        user.completedTasks = user.completedTasks || {}; user.completedTasks[id] = true;
+        buzz('success'); say('You received ' + rw + ' BDT bonus.');
+      } catch (e) { say('Failed to claim bonus.'); }
+      renderUI();
+    }, 5000);
+  }
+
+  async function withdraw(e) {
+    e.preventDefault();
+    const need = cfg.minimumWithdrawReferrals || 0;
+    if (need > 0 && user.referrals < need) return say('You need at least ' + need + ' referrals to withdraw. You have ' + user.referrals + '.');
+    const m = (cfg.withdrawMethods || []).find(x => x.name === $('withdraw-method').value);
+    const acc = $('account-number').value.trim(), amt = parseFloat($('amount').value);
+    if (!m) return say('Please select a withdrawal method.');
+    if (!acc) return say('Please enter your account number.');
+    if (isNaN(amt) || amt <= 0) return say('Please enter a valid amount.');
+    if (amt < m.min) return say('Minimum withdrawal for ' + m.name + ' is ' + m.min + ' BDT.');
+    if (amt > user.balance) return say("You don't have enough balance.");
+    const btn = $('withdraw-submit-btn');
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    let deducted = false;
+    try {
+      await db.ref('users/' + tgUser.id + '/balance').set(firebase.database.ServerValue.increment(-amt));
+      deducted = true; user.balance -= amt;
+      const id = db.ref('withdrawals/pending').push().key;
+      const req = { id, userId: tgUser.id, userName: ((user.firstName || '') + ' ' + (user.lastName || '')).trim(), method: m.name, account: acc, amount: amt, status: 'pending', timestamp: firebase.database.ServerValue.TIMESTAMP };
+      await db.ref('withdrawals/pending/' + id).set(req);
+      req.timestamp = Date.now(); txs.unshift(req);
+      buzz('success'); say('Withdrawal request submitted!'); $('withdraw-form').reset();
+    } catch (err) {
+      console.error(err);
+      if (deducted) { try { await db.ref('users/' + tgUser.id + '/balance').set(firebase.database.ServerValue.increment(amt)); user.balance += amt; } catch (x) {} }
+      buzz('error'); say('Failed to submit request. Your balance has been restored.');
+    } finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Request'; renderUI(); }
+  }
+
+  function setup() {
+    document.querySelectorAll('.nav button').forEach(b => b.onclick = () => {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      $(b.dataset.page).classList.add('active');
+      document.querySelectorAll('.nav button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+    });
+    $('popup').onclick = e => { if (e.target.id === 'popup' || e.target.classList.contains('btn')) closePopup(); };
+    $('copy-ref-link-btn').onclick = async () => {
+      const v = $('referral-link').value;
+      try { await navigator.clipboard.writeText(v); } catch (e) { $('referral-link').select(); document.execCommand('copy'); }
+      buzz('success'); say('Referral link copied!');
+    };
+    const msg = () => 'Join FLEX RUSH and start earning money! Use my referral link: ' + $('referral-link').value;
+    $('share-telegram-btn').onclick = () => go('https://t.me/share/url?url=' + encodeURIComponent($('referral-link').value) + '&text=' + encodeURIComponent(msg()));
+    $('share-whatsapp-btn').onclick = () => go('https://wa.me/?text=' + encodeURIComponent(msg()));
+    $('bonus-tasks').onclick = e => { const b = e.target.closest('[data-task]'); if (b && !b.disabled) claimTask(b.dataset.task); };
+    $('support-links').onclick = e => { const c = e.target.closest('[data-url]'); if (c) go(c.dataset.url); };
+    $('withdraw-form').onsubmit = withdraw;
+    setInterval(() => { if (user.breakUntil) renderAdTask(); }, 30000);
+  }
+
+  async function init() {
+    if (tg) { tg.ready(); tg.expand(); }
+    tgUser = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+    if (!tgUser || !tgUser.id) return fail('Please open FLEX RUSH from inside Telegram.');
+    try {
+      prog(10);
+      firebase.initializeApp(firebaseConfig); db = firebase.database(); prog(20);
+      cfg = (await T(db.ref('config').once('value'))).val() || {}; prog(40);
+      await loadUser(); prog(60);
+      await loadHistory(); prog(80);
+      loadAdSdk(cfg.adZoneId);
+      renderUI(); setup(); prog(100);
+      setTimeout(() => {
+        $('app-loader').style.display = 'none'; $('app').style.display = 'block';
+        if (cfg.welcomeMessage && !user.welcomed) {
+          popup('<h2 class="gt">Welcome to FLEX RUSH!</h2><p>' + esc(cfg.welcomeMessage) + '</p><button class="btn">Continue</button>');
+          db.ref('users/' + tgUser.id + '/welcomed').set(true);
+        }
+      }, 300);
+    } catch (e) {
+      console.error(e);
+      fail('Could not load app data: ' + (e.code || e.message || e) + (String(e.code || e.message).match(/permission/i) ? ' (Firebase Rules are blocking access)' : ''));
+    }
+  }
+  init();
+});
+</script>
+</body>
+  </html>
