@@ -234,8 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('total-ads-watched').textContent = user.lifetimeAdCount;
     $('total-earned').textContent = user.totalEarned.toFixed(2);
     $('referral-bonus-amount').textContent = 'Earn ' + (cfg.referralBonus || 0) + ' BDT per referral';
-    const bot = String(cfg.botUsername || '').replace(/^@/, ''), sn = cfg.appShortName || 'app';
-    $('referral-link').value = 'https://t.me/' + bot + '/' + sn + '?startapp=' + tgUser.id;
+    const bot = String(cfg.botUsername || 'flexrush_bot').replace(/^@/, ''), sn = String(cfg.appShortName || '').trim();
+    $('referral-link').value = 'https://t.me/' + bot + (sn ? '/' + sn : '') + '?startapp=' + tgUser.id;
     renderAdProgress(); renderAdTask(); renderBonus(); renderSupport(); renderMethods(); renderHistory();
     const min = cfg.minimumWithdrawReferrals || 0, n = $('min-note');
     n.style.display = min > 0 ? 'block' : 'none';
